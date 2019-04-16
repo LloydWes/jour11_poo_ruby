@@ -7,16 +7,8 @@ class Game
     @ennemies_name = Array.new
     make_enemies(4)
   end
-
-  def attack(enemy_indice)
-    enemy = enemies_in_sight[enemy_indice]
-    kill_player(enemy) if @human_player.attack(enemy) <= 0 #Si le joueur est mort on l'enleve du tableau
-  end
-  def get_damage(damage)
-    @human_player.get_damage(damage)
-  end
-
-  def show_players #Consigne cours
+  
+  def show_players
     show_human_state
     show_enemies_state
   end
@@ -38,15 +30,15 @@ class Game
     puts ""
     puts "attaquer un joueur en vue : "
   end
-  def self.greeting #Consigne cours
+  def self.greeting
     puts "------------------------------------------------"
     puts "|Bienvenue sur 'ILS VEULENT TOUS MA POO' !      |"
     puts "|Le but du jeu est d'être le dernier survivant !|"
     puts "-------------------------------------------------"
   end
 
-  def is_still_ongoing? #Consigne cours
-    enemies_alive? && @human_player.life_points > 0 
+  def is_still_ongoing?
+    enemies_alive? && @human_player.life_points > 0
   end
 
   def make_enemies(nb)
@@ -68,7 +60,7 @@ class Game
     "#{first_name} #{last_name}"
   end
 
-  def menu_choice(entry) #Consigne cours
+  def menu_choice(entry)
     case entry
     when 'a'
       @human_player.search_weapon
@@ -77,7 +69,8 @@ class Game
     else
       entry = entry.to_i
       if entry < enemies_in_sight.length
-        attack(entry)
+        enemy = enemies_in_sight[entry]
+        kill_player(enemy) if @human_player.attack(enemy) <= 0 #Si le joueur est mort on l'enleve du tableau
       else
         puts "Erreur, vous avez essayé d'attaquer un ennemie qui n'existe pas"
         print ">"
@@ -85,7 +78,7 @@ class Game
       end
     end  
   end
-  def enemies_attack #Consigne cours
+  def enemies_attack
     @enemies_in_sight.each do |enemy|
       enemy.attack(@human_player) if @human_player.is_alive?
     end
@@ -93,7 +86,7 @@ class Game
   def enemies_alive?
     @enemies_in_sight.length > 0
   end
-  def kill_player(player) #Consigne cours
+  def kill_player(player)
     @enemies_in_sight.delete(player)
   end
 end

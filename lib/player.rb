@@ -28,8 +28,8 @@ class Player
   end
   def attack(attacked_player)
     damage = compute_damage
-    puts "#{name} attaque #{attacked_player.name}"
-    puts "Il lui inflige #{damage} points de dégats"
+    puts "⚔️  #{name} attaque #{attacked_player.name}"
+    puts "    Il lui inflige #{damage} points de dégats"
     attacked_player.gets_dammage(damage)
   end
   def to_s

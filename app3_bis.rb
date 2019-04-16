@@ -1,3 +1,6 @@
+require 'bundler'
+Bundler.require
+
 require 'pry'
 
 require_relative 'lib/game_bis'
@@ -14,7 +17,7 @@ def perform
   puts "Tes pires ennemies viennent d'être créés ! GRRrrrr !".bg_blue.bold, "Ils sont #{my_game.enemies_in_sight.length}".bg_blue.bold
 
   while my_game.is_still_ongoing?
-    print "tour n°#{n}".bold,"----------------------------------------------------\n"
+    print "\ntour n°#{n}".bold,"----------------------------------------------------"
     puts ""
     my_game.show_alternatives #Afficher les options qui s'offrent au joueur
     my_game.show_players
